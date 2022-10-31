@@ -20,7 +20,7 @@ const App = ({ Component, pageProps }: AppProps<AppSession>) => {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{ colorScheme: "dark" }}
+        theme={{ colorScheme: "light" }}
       >
         <NotificationsProvider>
           <Component {...pageProps} />

@@ -23,7 +23,7 @@ const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
     if (error) return res.status(401).json({ message: error.message });
     return res.status(200).json({ data, authUrl: "/p/dashboard" });
   } catch (e) {
-    return res.status(400).json({});
+    return res.status(400).json({ message: "Something went wrong" });
   }
 };
 
