@@ -1,13 +1,11 @@
 import { SupabaseClient, withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@utils/database.types";
 import { NextPage } from "next";
-
 import serializeData from "@utils/serializeData";
 import Head from "next/head";
-import Layout from "@components/common/Layout";
 import UserReplicate from "@type/supabase/user.replicate";
-import ImagePost from "@type/supabase/image.post";
-import DashboardPage from "@components/DashboardPage";
+import Layout from "@components/common/Layout";
+import UploadImagePage from "@components/UploadImagePage";
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/sign-in",
@@ -18,38 +16,29 @@ export const getServerSideProps = withPageAuth({
       userid: data.user?.id || "",
     });
 
-    const { data: imagePost } = await supabase
-      .from("image_post")
-      .select(
-        `id, image_url, is_public, description, compress_action, created_at, user_profile(user_name)`
-      );
-
     return {
       props: {
         userReplicate: serializeData(JSON.stringify(userReplicate)),
-        imagePost: serializeData(JSON.stringify(imagePost)),
       },
     };
   },
 });
 
-const Dashboard: NextPage<{
+const UploadImage: NextPage<{
   userReplicate: UserReplicate[];
-  imagePost: ImagePost[];
 }> = (props) => {
-  const { userReplicate, imagePost } = props;
+  const { userReplicate } = props;
   const [user] = userReplicate;
-
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Upload Image</title>
       </Head>
       <Layout user={user}>
-        <DashboardPage imagePost={imagePost} />
+        <UploadImagePage />
       </Layout>
     </>
   );
 };
 
-export default Dashboard;
+export default UploadImage;

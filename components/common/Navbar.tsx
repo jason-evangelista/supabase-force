@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Box, Group, Menu, Text, Button } from "@mantine/core";
+import { NextLink } from "@mantine/next";
 import { showNotification } from "@mantine/notifications";
 import UserReplicate from "@type/supabase/user.replicate";
 import serviceSignOut from "./service/serviceSignOut";
@@ -23,15 +24,34 @@ const NavBar: FC<Props> = (props) => {
   };
 
   const { user } = props;
-  console.log(user);
   return (
-    <Group my="xl" position="apart">
+    <Group my="xl" position="apart" mb="xl">
       <Box>
         <Text variant="gradient" weight={700} size={24} color="blue">
           Project 2
         </Text>
       </Box>
-      <Box>
+      <Group>
+        <Button
+          variant="outline"
+          compact
+          component={NextLink}
+          href="/p/dashboard"
+          legacyBehavior
+          passHref
+        >
+          Home
+        </Button>
+        <Button
+          variant="outline"
+          compact
+          component={NextLink}
+          href="/p/upload-image"
+          legacyBehavior
+          passHref
+        >
+          Upload Image
+        </Button>
         <Menu width="10rem">
           <Menu.Target>
             <Button variant="gradient" compact>
@@ -42,7 +62,7 @@ const NavBar: FC<Props> = (props) => {
             <Menu.Item onClick={handleSignOut}>Sign Out</Menu.Item>
           </Menu.Dropdown>
         </Menu>
-      </Box>
+      </Group>
     </Group>
   );
 };
