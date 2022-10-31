@@ -4,6 +4,7 @@ import {
   User,
 } from "@supabase/auth-helpers-nextjs";
 import { AuthError } from "@supabase/supabase-js";
+import { Database } from "@utils/database.types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const verifyUserSession = async (
@@ -11,10 +12,10 @@ const verifyUserSession = async (
   res: NextApiResponse
 ): Promise<{
   user: User | undefined;
-  supabaseServer: SupabaseClient;
+  supabaseServer: SupabaseClient<Database>;
   error: AuthError | null;
 }> => {
-  const supabaseServer = createServerSupabaseClient({ req, res });
+  const supabaseServer = createServerSupabaseClient<Database>({ req, res });
   const {
     data: { session },
     error,
