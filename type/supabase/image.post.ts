@@ -1,4 +1,4 @@
-import type { Database } from "@utils/database.types";
+import type { Database } from "@type/database.types";
 
 type ImagePostItem = Database["public"]["Tables"]["image_post"]["Row"];
 type UserProfileItem = Database["public"]["Tables"]["user_profile"]["Row"];

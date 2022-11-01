@@ -1,4 +1,4 @@
-import type { Database } from "@utils/database.types";
+import type { Database } from "@type/database.types";
 
 type UserReplicate = Database["public"]["Tables"]["user_profile"]["Row"];
 

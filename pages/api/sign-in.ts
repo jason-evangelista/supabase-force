@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import FormField from "@type/form.field";
+import recordApiAnalytics from "@utils/recordApiAnalytics";
 
 type BodyPayload = Pick<FormField, "email" | "password">;
 
@@ -19,7 +20,11 @@ const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
       email,
       password,
     });
-
+    if (data) {
+      const { user } = data;
+      const apiPath = `${req.method} ${req.url}`;
+      await recordApiAnalytics(apiPath, user?.id || "");
+    }
     if (error) return res.status(401).json({ message: error.message });
     return res.status(200).json({ data, authUrl: "/p/dashboard" });
   } catch (e) {
