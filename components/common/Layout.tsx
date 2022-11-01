@@ -11,7 +11,7 @@ type Props = PropsWithChildren & {
 const Layout: FC<Props> = (props) => {
   const { children, user } = props;
   return (
-    <Container>
+    <Container size="xl">
       {user && <NavBar user={user} />}
       {children}
     </Container>
