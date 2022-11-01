@@ -23,6 +23,7 @@ const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
     if (data) {
       const { user } = data;
       const apiPath = `${req.method} ${req.url}`;
+
       await recordApiAnalytics(apiPath, user?.id || "");
     }
     if (error) return res.status(401).json({ message: error.message });
