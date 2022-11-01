@@ -1,5 +1,5 @@
 import { SupabaseClient, withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { Database } from "@utils/database.types";
+import { Database } from "@type/database.types";
 import { NextPage } from "next";
 
 import serializeData from "@utils/serializeData";

@@ -1,4 +1,5 @@
 import verifyUserSession from "@utils/api/verifyUserSession";
+import recordApiAnalytics from "@utils/recordApiAnalytics";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const signOut = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,6 +14,8 @@ const signOut = async (req: NextApiRequest, res: NextApiResponse) => {
       .json({ message: "This api call is only available for GET" });
 
   try {
+    const apiPath = `${req.method} ${req.url}`;
+    await recordApiAnalytics(apiPath, user.id);
     await supabaseServer.auth.signOut();
     return res.status(200).json({ message: "Successfully sign out" });
   } catch (e) {

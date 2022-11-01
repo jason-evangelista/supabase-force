@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import FormField from "@type/form.field";
 import supabaseServiceRole from "@utils/supabaseServiceRole";
+import recordApiAnalytics from "@utils/recordApiAnalytics";
 
 type BodyRequest = FormField;
 
@@ -32,7 +33,8 @@ const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
         user_name: user?.email || "",
       }
     );
-    console.log(repError);
+    const apiPath = `${req.method} ${req.url}`;
+    await recordApiAnalytics(apiPath, user?.id || "");
     if (!repError) {
       return res.status(200).json({ message: "Successfully Registered" });
     } else {

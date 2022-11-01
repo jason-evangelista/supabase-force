@@ -9,7 +9,6 @@ type Props = {
 
 const ImagePostList: FC<Props> = (props) => {
   const { imagePost } = props;
-  console.log(imagePost);
   return (
     <Stack>
       {imagePost.map((item) => (

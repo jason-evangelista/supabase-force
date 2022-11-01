@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import verifyUserSession from "@utils/api/verifyUserSession";
 import UploadImageForm from "@components/UploadImagePage/type/upload.image.form";
+import recordApiAnalytics from "@utils/recordApiAnalytics";
 
 type OverrideBodyReq = UploadImageForm & {
   imagePath: string;
@@ -35,6 +36,9 @@ const uploadImage = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     if (error) return res.status(400).json({ message: error.message });
+
+    const apiPath = `${req.method} ${req.url}`;
+    await recordApiAnalytics(apiPath, user.id);
     return res
       .status(200)
       .json({ message: "Successfully insert", redirectUrl: "/p/dashboard" });

@@ -18,7 +18,7 @@ import compressActionGroup, {
 import CompressAction from "../type/compress.action";
 import UploadImageForm from "../type/upload.image.form";
 import serviceUploadImage from "../service/serviceUploadImage";
-import { Database } from "@utils/database.types";
+import { Database } from "@type/database.types";
 import { useRouter } from "next/router";
 import { AxiosError } from "axios";
 import { showNotification } from "@mantine/notifications";

@@ -4,7 +4,7 @@ import {
   User,
 } from "@supabase/auth-helpers-nextjs";
 import { AuthError } from "@supabase/supabase-js";
-import { Database } from "@utils/database.types";
+import { Database } from "@type/database.types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const verifyUserSession = async (
