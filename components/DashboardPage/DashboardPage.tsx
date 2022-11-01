@@ -10,7 +10,7 @@ type Props = {
 const DashboardPage: FC<Props> = (props) => {
   const { imagePost } = props;
   return (
-    <Center>
+    <Center py="xl">
       <ImagePostList imagePost={imagePost} />
     </Center>
   );

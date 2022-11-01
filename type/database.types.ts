@@ -61,6 +61,29 @@ export interface Database {
           updated_at?: string
         }
       }
+      peer_review: {
+        Row: {
+          review_insight: string
+          created_by: string | null
+          id: string
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          review_insight: string
+          created_by?: string | null
+          id?: string
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          review_insight?: string
+          created_by?: string | null
+          id?: string
+          created_at?: string | null
+          updated_at?: string | null
+        }
+      }
       user_profile: {
         Row: {
           user_id: string
@@ -109,6 +132,10 @@ export interface Database {
           compress_action: string
           created_by: string
         }
+        Returns: undefined
+      }
+      insert_peer_review: {
+        Args: { review_insight: string; created_by: string }
         Returns: undefined
       }
       record_api_call_analytics: {
