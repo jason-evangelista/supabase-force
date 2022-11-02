@@ -50,7 +50,7 @@ const NavBar: FC<Props> = (props) => {
           legacyBehavior
           passHref
         >
-          Upload Image
+          + Upload Image
         </Button>
         <Button
           variant="outline"
@@ -60,7 +60,17 @@ const NavBar: FC<Props> = (props) => {
           legacyBehavior
           passHref
         >
-          Peer Review
+          + Peer Review
+        </Button>
+        <Button
+          variant="outline"
+          compact
+          component={NextLink}
+          href="/p/peer-review-list"
+          legacyBehavior
+          passHref
+        >
+          Peer Review List
         </Button>
         <Menu width="10rem">
           <Menu.Target>

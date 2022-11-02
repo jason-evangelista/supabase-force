@@ -21,7 +21,6 @@ const uploadImage = async (req: NextApiRequest, res: NextApiResponse) => {
       .json({ message: "This api call is only available for POST" });
   try {
     const bodyPayload = req.body as OverrideBodyReq;
-    console.log(bodyPayload);
     const { data, error: signImgError } = await supabaseServer.storage
       .from("images")
       .createSignedUrl(bodyPayload.imagePath, EXPIRE_IN);
