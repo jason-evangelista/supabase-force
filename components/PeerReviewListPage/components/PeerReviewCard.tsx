@@ -11,6 +11,7 @@ type Props = {
 
 const PeerReviewCard: FC<Props> = (props) => {
   const { peerReview } = props;
+
   const parsePeerReviewInsight = JSON.parse(
     peerReview.review_insight
   ) as ParsePeerReview;

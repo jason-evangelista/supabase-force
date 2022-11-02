@@ -1,5 +1,15 @@
-import { Card, Image, Text, Group, Badge, Box, Divider } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Text,
+  Group,
+  Badge,
+  Box,
+  Divider,
+  Highlight,
+} from "@mantine/core";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 import { FC } from "react";
 
 type Props = {
@@ -12,7 +22,14 @@ type Props = {
   createdAt: string;
 };
 
+type QueryParams = {
+  searchQuery: string;
+};
+
 const ImagePostCard: FC<Props> = (props) => {
+  const { query } = useRouter();
+  const { searchQuery } = query as QueryParams;
+
   const { compressAction, createdBy, description, image, isPublic, createdAt } =
     props;
   return (
@@ -26,9 +43,15 @@ const ImagePostCard: FC<Props> = (props) => {
       </Group>
       <Divider my="sm" />
       <Box mb="sm">
-        <Text color="dimmed" size="sm">
-          {description}
-        </Text>
+        {searchQuery ? (
+          <Highlight highlight={searchQuery.split(" ")}>
+            {description}
+          </Highlight>
+        ) : (
+          <Text color="dimmed" size="sm">
+            {description}
+          </Text>
+        )}
       </Box>
       <Group>
         <Badge color={isPublic ? "blue" : "green"}>
