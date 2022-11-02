@@ -36,7 +36,6 @@ export const getServerSideProps = withPageAuth({
       const { data: peerReview } = await supabase
         .from("peer_review")
         .select("*");
-      console.log(peerReview);
       return {
         props: {
           userReplicate: serializeData(JSON.stringify(userReplicate)),
