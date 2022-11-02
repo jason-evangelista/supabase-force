@@ -31,57 +31,63 @@ export interface Database {
       }
       image_post: {
         Row: {
+          id: string
           image_url: string
           compress_action: string
           is_public: boolean
           description: string
           created_by: string
-          id: string
           created_at: string
           updated_at: string
+          description_doc: unknown | null
         }
         Insert: {
+          id?: string
           image_url: string
           compress_action: string
           is_public: boolean
           description: string
           created_by: string
-          id?: string
           created_at?: string
           updated_at?: string
+          description_doc?: unknown | null
         }
         Update: {
+          id?: string
           image_url?: string
           compress_action?: string
           is_public?: boolean
           description?: string
           created_by?: string
-          id?: string
           created_at?: string
           updated_at?: string
+          description_doc?: unknown | null
         }
       }
       peer_review: {
         Row: {
+          id: string
           review_insight: string
           created_by: string | null
-          id: string
           created_at: string | null
           updated_at: string | null
+          review_insight_doc: unknown | null
         }
         Insert: {
+          id?: string
           review_insight: string
           created_by?: string | null
-          id?: string
           created_at?: string | null
           updated_at?: string | null
+          review_insight_doc?: unknown | null
         }
         Update: {
+          id?: string
           review_insight?: string
           created_by?: string | null
-          id?: string
           created_at?: string | null
           updated_at?: string | null
+          review_insight_doc?: unknown | null
         }
       }
       user_profile: {
@@ -89,22 +95,22 @@ export interface Database {
           user_id: string
           user_name: string
           user_email: string
-          updated_at: string
           created_at: string
+          updated_at: string
         }
         Insert: {
           user_id: string
           user_name: string
           user_email: string
-          updated_at?: string
           created_at?: string
+          updated_at?: string
         }
         Update: {
           user_id?: string
           user_name?: string
           user_email?: string
-          updated_at?: string
           created_at?: string
+          updated_at?: string
         }
       }
     }

@@ -13,23 +13,41 @@ export const getServerSideProps = withPageAuth({
   redirectTo: "/sign-in",
   getServerSideProps: async (ctx, supabase: SupabaseClient<Database>) => {
     const { data } = await supabase.auth.getUser();
-
     const { data: userReplicate } = await supabase.rpc("get_user_replicate", {
       userid: data.user?.id || "",
     });
 
-    const { data: imagePost } = await supabase
-      .from("image_post")
-      .select(
-        `id, image_url, is_public, description, compress_action, created_at, user_profile(user_name)`
-      );
+    const searchQuery = ctx.query.searchQuery as string;
 
-    return {
-      props: {
-        userReplicate: serializeData(JSON.stringify(userReplicate)),
-        imagePost: serializeData(JSON.stringify(imagePost)),
-      },
-    };
+    if (searchQuery) {
+      const parseSearchQuery = searchQuery.split(" ").join(" | ");
+      const { data: imagePost } = await supabase
+        .from("image_post")
+        .select(
+          "id, image_url, is_public, description, compress_action, created_at, user_profile(user_name), description_doc"
+        )
+        .textSearch("description_doc", `${parseSearchQuery}:*`, {
+          config: "english",
+        });
+      return {
+        props: {
+          userReplicate: serializeData(JSON.stringify(userReplicate)),
+          imagePost: serializeData(JSON.stringify(imagePost)),
+        },
+      };
+    } else {
+      const { data: imagePost } = await supabase
+        .from("image_post")
+        .select(
+          `id, image_url, is_public, description, compress_action, created_at, user_profile(user_name)`
+        );
+      return {
+        props: {
+          userReplicate: serializeData(JSON.stringify(userReplicate)),
+          imagePost: serializeData(JSON.stringify(imagePost)),
+        },
+      };
+    }
   },
 });
 

@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { Stack } from "@mantine/core";
+import { FC, FormEvent, useRef } from "react";
+import { Stack, TextInput } from "@mantine/core";
+import { useRouter } from "next/router";
 import ImagePost from "@type/supabase/image.post";
 import ImagePostCard from "./ImagePostCard";
 
@@ -8,9 +9,27 @@ type Props = {
 };
 
 const ImagePostList: FC<Props> = (props) => {
+  const router = useRouter();
   const { imagePost } = props;
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const query = searchInputRef.current?.value;
+    router.replace({
+      query: {
+        ...router.query,
+        searchQuery: query,
+      },
+    });
+  };
+
   return (
     <Stack>
+      <form onSubmit={handleSearch}>
+        <TextInput ref={searchInputRef} placeholder="Search for keyword" />
+      </form>
       {imagePost.map((item) => (
         <ImagePostCard
           key={item.id}
