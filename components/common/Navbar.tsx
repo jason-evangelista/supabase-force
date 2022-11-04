@@ -72,6 +72,16 @@ const NavBar: FC<Props> = (props) => {
         >
           Peer Review List
         </Button>
+        <Button
+          variant="outline"
+          compact
+          component={NextLink}
+          href="/p/keyword-analysis"
+          legacyBehavior
+          passHref
+        >
+          Keyword Analysis
+        </Button>
         <Menu width="10rem">
           <Menu.Target>
             <Button variant="gradient" compact>

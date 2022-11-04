@@ -21,13 +21,14 @@ export const getServerSideProps = withPageAuth({
 
     if (searchQuery) {
       const parseSearchQuery = searchQuery.split(" ").join(" | ");
+      console.log(parseSearchQuery);
       const { data: imagePost } = await supabase
         .from("image_post")
         .select(
           "id, image_url, is_public, description, compress_action, created_at, user_profile(user_name), description_doc"
         )
         .textSearch("description_doc", `${parseSearchQuery}:*`, {
-          config: "english",
+          config: "simple",
         });
       return {
         props: {
