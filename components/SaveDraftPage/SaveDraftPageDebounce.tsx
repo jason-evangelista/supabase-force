@@ -56,7 +56,7 @@ const SaveDraftPageDebounce: FC = () => {
 
   useEffect(() => {
     if (!isFirstVisit.current) return;
-    if (!userNameLS) return;
+    if (!localStorage.getItem("debounce-username")) return;
     showNotification({
       title: "Apply Draft",
       message: (
@@ -75,7 +75,7 @@ const SaveDraftPageDebounce: FC = () => {
       },
       autoClose: false,
     });
-  }, [onDraftApply, removeUserNameLS, userNameLS]);
+  }, [onDraftApply, removeUserNameLS]);
 
   return (
     <Center sx={{ height: "90vh" }}>
