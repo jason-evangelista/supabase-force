@@ -56,6 +56,7 @@ const SaveDraftPageDebounce: FC = () => {
 
   useEffect(() => {
     if (!isFirstVisit.current) return;
+    if (!userNameLS) return;
     showNotification({
       title: "Apply Draft",
       message: (
