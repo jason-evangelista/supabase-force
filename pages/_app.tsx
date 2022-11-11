@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }: AppProps<AppSession>) => {
         withNormalizeCSS
         theme={{ colorScheme: "light" }}
       >
-        <NotificationsProvider>
+        <NotificationsProvider position="top-center" limit={1}>
           <Component {...pageProps} />
         </NotificationsProvider>
       </MantineProvider>

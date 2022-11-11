@@ -24,6 +24,7 @@ const uploadImage = async (req: NextApiRequest, res: NextApiResponse) => {
     const { data, error: signImgError } = await supabaseServer.storage
       .from("images")
       .createSignedUrl(bodyPayload.imagePath, EXPIRE_IN);
+
     console.log({ signImgError, data });
 
     const { error } = await supabaseServer.rpc("insert_image_post", {
